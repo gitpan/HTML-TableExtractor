@@ -1,4 +1,4 @@
-# $Id: 1.t,v 1.1.1.1 2002/06/11 13:45:15 simon Exp $
+# $Id: 1.t,v 1.2 2002/06/11 15:54:24 simon Exp $
 
 
 use Test;
@@ -24,10 +24,10 @@ $tablebits1 = '';
 
 $tablebits2 = '';
 
-$table_text = "<table id='foo' name='bar' border='0'>";
-$header_text = "<th>";
-$row_text = "<tr>";
-$cell_text = "<td>";
+$table_text = "<TABLE id='foo' name='bar' border='0'>";
+$header_text = "<TH>";
+$row_text = "<TR>";
+$cell_text = "<TD>";
 
 $html = qq{
 <html>
@@ -49,7 +49,7 @@ $cell_text
 sub table_callback
 {
   my ($attr, $orig) = @_;
-	$tablebits1 = "<table";
+	$tablebits1 = "<TABLE";
 	for (qw(id name border)) {
 		$tablebits1 .= " $_='$attr->{$_}'";
 	}

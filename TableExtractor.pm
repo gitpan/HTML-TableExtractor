@@ -1,4 +1,4 @@
-#  $Id: TableExtractor.pm,v 1.1.1.2 2002/06/11 13:48:55 simon Exp $
+#  $Id: TableExtractor.pm,v 1.2 2002/06/11 15:52:25 simon Exp $
 
 
 package HTML::TableExtractor;
@@ -10,7 +10,7 @@ use HTML::Parser;
 use strict;
 
 
-our $VERSION = 0.10;
+our $VERSION = 0.11;
 
 # The tags we're interested in.
 my @tag_names = qw(table tr td th);
@@ -21,7 +21,7 @@ sub start
 {
 	my ($self, $tag, $attr, $attrseq, $origtext) = @_;
 
-	return unless grep { $_ eq $tag } @tag_names;
+	return unless grep { $_ eq lc($tag) } @tag_names;
 
 	if (ref($self->{"${tag}_start_callback"}) eq 'CODE') {
 		&{$self->{"${tag}_start_callback"}}($attr, $origtext);
@@ -39,7 +39,7 @@ sub end
 {
 	my ($self, $tag, $origtext) = @_;
 
-	return unless grep { $_ eq $tag } @tag_names;
+	return unless grep { $_ eq lc($tag) } @tag_names;
 
 	if (ref($self->{"${tag}_callback"}) eq 'CODE') {
 		&{$self->{"${tag}_callback"}}($origtext);
